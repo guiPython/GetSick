@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a5d48142589aa498cf8bf1778b28c4, type: 3}
+  m_Name: Enxaqueca
+  m_EditorClassIdentifier: 
+  name: Enxaqueca
+  description: "Doen\xE7a neurol\xF3gica, gen\xE9tica e cr\xF4nica cuja principal
+    caracter\xEDstica \xE9 a dor de cabe\xE7a latejante"
+  damage: 0.5
+  curedBy:
+  - Analgesico
+  type: 0
+  lifetime: 1
+  duration: 5
+  numberOfCards: 1
