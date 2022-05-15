@@ -15,7 +15,7 @@ MonoBehaviour:
   name: HabitosSaudaveis
   description: 
   healing: 0.25
-  type: 0
+  type: 1
   lifetime: 2
   duration: 0
   numberOfCards: 1
