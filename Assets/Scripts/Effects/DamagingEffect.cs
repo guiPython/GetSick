@@ -6,8 +6,8 @@ public class DamagingEffect : Effect
     public float damage;
     public List<string> curedBy;
 
-    public DamagingEffect(string name, float damage, IEffectLifeTime lifetime, List<string> curedBy)
-        : base(name, lifetime)
+    public DamagingEffect(string name, string description, float damage, IEffectLifeTime lifetime, List<string> curedBy)
+        : base(name, description, lifetime)
     {
         this.damage = damage;
         this.curedBy = curedBy ?? new List<string>();

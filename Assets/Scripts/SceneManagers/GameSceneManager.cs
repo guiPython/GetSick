@@ -215,8 +215,8 @@ public class GameSceneManager : MonoBehaviour
 
             Effect effect = positiveEffect.type switch
             {
-                PositiveEffectType.Cure => new CureEffect(positiveEffect.name, lifetime),
-                PositiveEffectType.Heal => new HealingEffect(positiveEffect.name, positiveEffect.healing, lifetime),
+                PositiveEffectType.Cure => new CureEffect(positiveEffect.name, positiveEffect.description, lifetime),
+                PositiveEffectType.Heal => new HealingEffect(positiveEffect.name, positiveEffect.description, positiveEffect.healing, lifetime),
                 _ => throw new NotImplementedException("Invalid effect type")
             };
 
@@ -235,7 +235,7 @@ public class GameSceneManager : MonoBehaviour
 
             Effect effect = negativeEffect.type switch
             {
-                NegativeEffectType.Damage => new DamagingEffect(negativeEffect.name, negativeEffect.damage, lifetime, negativeEffect.curedBy.ToList()),
+                NegativeEffectType.Damage => new DamagingEffect(negativeEffect.name, negativeEffect.description, negativeEffect.damage, lifetime, negativeEffect.curedBy.ToList()),
                 _ => throw new NotImplementedException("Invalid effect type")
             };
 

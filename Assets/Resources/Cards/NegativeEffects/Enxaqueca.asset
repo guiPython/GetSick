@@ -18,6 +18,7 @@ MonoBehaviour:
   damage: 0.5
   curedBy:
   - Analgesico
+  - AlimentacaoSaudavel
   type: 0
   lifetime: 1
   duration: 5

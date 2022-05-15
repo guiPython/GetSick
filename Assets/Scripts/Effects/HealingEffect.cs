@@ -4,7 +4,7 @@ public class HealingEffect : Effect
 {
     public float healing;
 
-    public HealingEffect(string name, float healing, IEffectLifeTime lifetime) : base(name, lifetime)
+    public HealingEffect(string name, string description, float healing, IEffectLifeTime lifetime) : base(name, description, lifetime)
     {
         this.healing = healing;
     }

@@ -37,8 +37,11 @@ public class PlayerUIManager : MonoBehaviour
 
         GameObject cardSlot = this.cardSlots.First(slot => SlotIsEmpty(slot));
 
-        Image image = cardSlot.GetComponent<Image>();
+        Image image = cardSlot.transform.Find("Background").GetComponent<Image>();
         image.sprite = Resources.Load<Sprite>("ArtWork/" + name);
+
+        Text description = cardSlot.transform.Find("Description").GetComponent<Text>();
+        description.text = effect.name;
 
         Destroy(cardSlot.GetComponent<Card>());
         Card card = cardSlot.AddComponent<Card>();
@@ -61,9 +64,9 @@ public class PlayerUIManager : MonoBehaviour
 
         foreach (Transform transform in this.transform)
         {
-            if (transform.name.StartsWith("CardSlot"))
+            if (transform.name.StartsWith("CardSlotPrefab"))
             {
-                gameObjects.Add(transform.gameObject);
+                gameObjects.Add(transform.Find("Canvas").gameObject);
             }
         }
 

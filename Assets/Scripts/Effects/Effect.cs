@@ -1,12 +1,15 @@
 public abstract class Effect : IEffect
 {
     public string name;
+
+    public string description;
     public PlayerData target;
     public IEffectLifeTime lifetime;
 
-    public Effect(string name, IEffectLifeTime lifetime)
+    public Effect(string name, string description, IEffectLifeTime lifetime)
     {
         this.name = name;
+        this.description = description;
         this.lifetime = lifetime;
      }
 
