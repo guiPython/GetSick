@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameSceneManager : MonoBehaviour
@@ -96,7 +97,7 @@ public class GameSceneManager : MonoBehaviour
 
         bool gameHasEnded = this.CheckWhetherGameHasEnded();
         if (gameHasEnded)
-            return;
+            SceneManager.LoadScene("EndGameScene");
 
         this.MoveToTheNextTurn();
     }
@@ -142,7 +143,7 @@ public class GameSceneManager : MonoBehaviour
 
     public bool CheckWhetherGameHasEnded()
     {
-        return false;
+        return player1Data.ShouldBeDead() || player2Data.ShouldBeDead();
     }
 
     private void MoveToTheNextTurn()
@@ -208,7 +209,7 @@ public class GameSceneManager : MonoBehaviour
 
         bool gameHasEnded = this.CheckWhetherGameHasEnded();
         if (gameHasEnded)
-            return;
+            SceneManager.LoadScene("EndGameScene");
 
         this.MoveToTheNextTurn();
     }
@@ -266,9 +267,11 @@ public class GameSceneManager : MonoBehaviour
 
     void Update()
     {
+        if (this.CheckWhetherGameHasEnded())
+            SceneManager.LoadScene("EndGameScene");
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             this.PassTurn();
-        }
+        } 
     }
 }
