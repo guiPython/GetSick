@@ -77,17 +77,19 @@ public class GameSceneManager : MonoBehaviour
             return;
 
         PlayerData cardTarget = card.effect is DamagingEffect ? this.currentPlayer.enemy : this.currentPlayer;
-        this.RemoveCard(card, cardTarget);
+        this.RemoveCard(card, this.currentPlayer);
 
         if (card.effect.lifetime is ImmediateLifetime)
         {
-            card.effect.Affect(cardTarget);
+            cardTarget.AddEffect(card.effect);
+            card.effect.Affect();
+            cardTarget.RemoveEffect(card.effect);
             this.HandleCurrentTurn();
         }
         else
         {
             this.HandleCurrentTurn();
-            card.effect.AddEffectTo(cardTarget);
+            cardTarget.AddEffect(card.effect);
         }
 
         bool gameHasEnded = this.CheckWhetherGameHasEnded();
@@ -103,7 +105,7 @@ public class GameSceneManager : MonoBehaviour
         {
             foreach (Effect effect in player.activeEffects)
             {
-                effect.Affect(player);
+                effect.Affect();
 
                 if (effect.lifetime is TemporaryLifetime lifetime)
                 {
@@ -111,9 +113,7 @@ public class GameSceneManager : MonoBehaviour
                 }
             }
 
-            player.activeEffects.RemoveAll(
-                effect => effect.lifetime is TemporaryLifetime lifetime && lifetime.duration == 0
-            );
+            player.RemoveExpiredEffects();
 
             if (player.ShouldBeDead())
             {

@@ -18,10 +18,10 @@ public class DamagingEffect : Effect
         return this.curedBy.Contains(remedyName);
     }
 
-    public override void Affect(PlayerData playerData)
+    public override void Affect()
     {
         this.target.timeRemaining -= this.damage;
 
-        base.Affect(playerData);
+        base.Affect();
     }
 }

@@ -27,6 +27,34 @@ public class PlayerData : ScriptableObject
         this.cards.Add(card);
     }
 
+    public void AddEffect(Effect effect)
+    {
+        effect.target = this;
+        this.activeEffects.Add(effect);
+    }
+
+    public void RemoveEffect(Effect effect)
+    {
+        effect.target = null;
+        this.activeEffects.Remove(effect);
+    }
+
+    public void RemoveExpiredEffects()
+    {
+        List<Effect> effectsToRemove = new List<Effect>();
+
+        foreach (Effect effect in this.activeEffects)
+        {
+            bool expired = effect.lifetime is TemporaryLifetime lifetime && lifetime.duration == 0;
+            if (expired)
+            {
+                effectsToRemove.Add(effect);
+            }
+        }
+
+        activeEffects.RemoveAll(effectsToRemove.Contains);
+    }
+
     public bool ShouldBeDead() => this.timeRemaining <= 0.0f + float.Epsilon;
     public void CureDesease(string remedyName)
     {

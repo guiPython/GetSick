@@ -3,7 +3,7 @@ public abstract class Effect : IEffect
     public string name;
 
     public string description;
-    public PlayerData target;
+    public PlayerData? target;
     public IEffectLifeTime lifetime;
 
     public Effect(string name, string description, IEffectLifeTime lifetime)
@@ -13,12 +13,7 @@ public abstract class Effect : IEffect
         this.lifetime = lifetime;
      }
 
-    public virtual void AddEffectTo(PlayerData target) {
-        this.target = target;
-        this.target.activeEffects.Add(this);
-    }
-
-    public virtual void Affect(PlayerData playerData) { }
+    public virtual void Affect() { }
 
     public Effect? DyingWish()
     {

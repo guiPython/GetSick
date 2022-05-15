@@ -6,10 +6,10 @@ public class CureEffect : Effect
     {
     }
 
-    public override void Affect(PlayerData playerData)
+    public override void Affect()
     {
-        playerData.CureDesease(this.name);
+        this.target.CureDesease(this.name);
 
-        base.Affect(playerData);
+        base.Affect();
     }
 }

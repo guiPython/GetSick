@@ -9,10 +9,10 @@ public class HealingEffect : Effect
         this.healing = healing;
     }
 
-    public override void Affect(PlayerData playerData)
+    public override void Affect()
     {
-        playerData.timeRemaining += this.healing;
+        this.target.timeRemaining += this.healing;
 
-        base.Affect(playerData);
+        base.Affect();
     }
 }
