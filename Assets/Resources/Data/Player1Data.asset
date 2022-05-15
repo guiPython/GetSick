@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Number: 1
   name: Player 1
-  timeRemaining: 95
+  timeRemaining: 88.75
   cards:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
