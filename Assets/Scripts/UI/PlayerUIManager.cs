@@ -37,10 +37,28 @@ public class PlayerUIManager : MonoBehaviour
 
         GameObject cardSlot = this.cardSlots.First(slot => SlotIsEmpty(slot));
 
-        Image image = cardSlot.transform.Find("Background").GetComponent<Image>();
-        image.sprite = Resources.Load<Sprite>("ArtWork/" + name);
+        Image icon = this.GetCardSlotComponent<Image>(cardSlot, "Icon");
+        icon.sprite = Resources.Load<Sprite>("ArtWork/" + name);
 
-        Text description = cardSlot.transform.Find("Description").GetComponent<Text>();
+        Text title = this.GetCardSlotComponent<Text>(cardSlot, "Title");
+        Text description = this.GetCardSlotComponent<Text>(cardSlot, "Description");
+        Text valueText = this.GetCardSlotComponent<Text>(cardSlot, "Value");
+
+        title.text = effect.name;
+        description.text = effect.description;
+        valueText.text = string.Empty;
+
+        if (effect is DamagingEffect damagingEffect)
+        {
+            string template = "-{0:0.00} per round";
+            TextWithFloat value = new TextWithFloat(valueText, template, damagingEffect.damage);
+        }
+        else if (effect is HealingEffect healingEffect)
+        {
+            string template = "+{0:0.00} per round";
+            TextWithFloat value = new TextWithFloat(valueText, template, healingEffect.healing);
+        }
+
         description.text = effect.name;
 
         Destroy(cardSlot.GetComponent<Card>());
@@ -56,6 +74,11 @@ public class PlayerUIManager : MonoBehaviour
     public bool SlotIsEmpty(GameObject slot)
     {
         return slot.GetComponent<Card>() is null;
+    }
+
+    public T GetCardSlotComponent<T>(GameObject cardSlot, string componentName)
+    {
+        return cardSlot.transform.Find(componentName).GetComponent<T>();
     }
 
     private List<GameObject> GetCardsGameObjects()
