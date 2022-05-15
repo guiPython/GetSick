@@ -39,6 +39,8 @@ public class GameSceneManager : MonoBehaviour
         this.playerOrderQueue.Enqueue(player2Data);
 
         this.currentPlayer = this.playerOrderQueue.Peek();
+        PlayerUIManager enemyUIManager = this.GetPlayerUI(this.currentPlayer.enemy);
+        enemyUIManager.FlipCards();
         this.UpdateNames();
     }
 
@@ -99,6 +101,15 @@ public class GameSceneManager : MonoBehaviour
         this.MoveToTheNextTurn();
     }
 
+    private void FlipBothPlayersCards()
+    {
+        PlayerUIManager playerUIManager = this.GetPlayerUI(this.currentPlayer);
+        playerUIManager.FlipCards();
+        
+        PlayerUIManager enemyUIManager = this.GetPlayerUI(this.currentPlayer.enemy);
+        enemyUIManager.FlipCards();
+    }
+
     private void HandleCurrentTurn()
     {
         foreach (PlayerData player in this.playerOrderQueue)
@@ -149,6 +160,7 @@ public class GameSceneManager : MonoBehaviour
         currentPlayerUI.UpdateNameColor(Color.white);
 
         this.UpdateNames();
+        this.FlipBothPlayersCards();
 
         this.turn++;
     }

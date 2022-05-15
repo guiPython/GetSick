@@ -71,6 +71,16 @@ public class PlayerUIManager : MonoBehaviour
         card.gameObject.SetActive(true);
     }
 
+    public void FlipCards()
+    {
+        foreach (var cardSlot in this.cardSlots)
+        {
+            Image back = this.GetCardSlotComponent<Image>(cardSlot, "Back");
+
+            back.enabled = !back.enabled;
+        }
+    }
+
     public bool SlotIsEmpty(GameObject slot)
     {
         return slot.GetComponent<Card>() is null;
