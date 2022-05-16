@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TratamentoMedico
   m_EditorClassIdentifier: 
   name: Tratamento Medico
-  description: "Cura depress\xE3o"
+  description: "Cura hemorragia, depress\xE3o"
   healing: 0
   type: 0
   lifetime: 0

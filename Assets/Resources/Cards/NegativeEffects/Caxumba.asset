@@ -17,6 +17,6 @@ MonoBehaviour:
   damage: 1
   curedBy: []
   type: 0
-  lifetime: 0
+  lifetime: 1
   duration: 10
   numberOfCards: 10
