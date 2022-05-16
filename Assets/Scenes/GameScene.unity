@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 892740704}
   - component: {fileID: 892740703}
   m_Layer: 5
-  m_Name: Pass Turn
+  m_Name: EndTurn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -790,7 +790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6875305115950414938, guid: 06e32b3fc9c749d45a3dad1333eb3e1b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 945
       objectReference: {fileID: 0}
     - target: {fileID: 6875305115950414938, guid: 06e32b3fc9c749d45a3dad1333eb3e1b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1077,7 +1077,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Comprar Carta
+  m_Text: Comprar Carta (1)
 --- !u!222 &2068467995
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 2137233839}
   - component: {fileID: 2137233838}
   m_Layer: 5
-  m_Name: Buy Card
+  m_Name: BuyCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1122,8 +1122,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 530.3085, y: -16}
-  m_SizeDelta: {x: 244.4761, y: 90.91}
+  m_AnchoredPosition: {x: 505.4641, y: -16}
+  m_SizeDelta: {x: 294.1649, y: 90.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2137233838
 MonoBehaviour:

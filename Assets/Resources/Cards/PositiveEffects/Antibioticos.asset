@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Antibioticos
   m_EditorClassIdentifier: 
   name: Antibioticos
-  description: Cura
+  description: Cura Gripe
   healing: 0
   type: 0
   lifetime: 0

@@ -37,10 +37,12 @@ public class GameSceneManager : MonoBehaviour
 
         this.player1Data.timeRemaining = 100.0f;
         this.player1Data.status = PlayerStatus.Alive;
+        this.player1Data.activeEffects.Clear();
         this.player1Data.cards.Clear();
 
         this.player2Data.timeRemaining = 100.0f;
         this.player2Data.status = PlayerStatus.Alive;
+        this.player1Data.activeEffects.Clear();
         this.player2Data.cards.Clear();
 
         PlayerUIManager player1UIManager = this.GetPlayerUI(this.player1Data);
