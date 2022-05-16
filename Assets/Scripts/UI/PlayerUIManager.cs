@@ -38,7 +38,7 @@ public class PlayerUIManager : MonoBehaviour
         GameObject cardSlot = this.cardSlots.First(slot => SlotIsEmpty(slot));
 
         Image icon = this.GetCardSlotComponent<Image>(cardSlot, "Icon");
-        icon.sprite = Resources.Load<Sprite>("ArtWork/" + name);
+        icon.sprite = Resources.Load<Sprite>("ArtWork/" + name.Replace(" ", ""));
 
         Text title = this.GetCardSlotComponent<Text>(cardSlot, "Title");
         Text description = this.GetCardSlotComponent<Text>(cardSlot, "Description");
@@ -80,8 +80,6 @@ public class PlayerUIManager : MonoBehaviour
 
             TextWithFloat value = new TextWithFloat(valueText, template, healingEffect.healing);
         }
-
-        description.text = effect.name;
 
         Destroy(cardSlot.GetComponent<Card>());
         Card card = cardSlot.AddComponent<Card>();

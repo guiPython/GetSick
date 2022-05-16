@@ -18,5 +18,5 @@ MonoBehaviour:
   curedBy: []
   type: 0
   lifetime: 0
-  duration: 0
-  numberOfCards: 2
+  duration: 10
+  numberOfCards: 10

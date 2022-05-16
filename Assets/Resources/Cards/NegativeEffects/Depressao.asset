@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Depressao
   description: 
-  damage: 0.5
-  curedBy: []
+  damage: 2
+  curedBy:
+  - Habitos Saudaveis
+  - Tratamento Medico
   type: 0
-  lifetime: 0
-  duration: 0
-  numberOfCards: 4
+  lifetime: 1
+  duration: 15
+  numberOfCards: 10

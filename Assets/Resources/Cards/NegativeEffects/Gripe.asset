@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Gripe
   m_EditorClassIdentifier: 
   name: Gripe
-  description: 
-  damage: 0.5
+  description: "Causada por bact\xE9rias"
+  damage: 6
   curedBy:
-  - Repouso
+  - Antibiotico
   type: 0
   lifetime: 1
-  duration: 3
-  numberOfCards: 3
+  duration: 5
+  numberOfCards: 10

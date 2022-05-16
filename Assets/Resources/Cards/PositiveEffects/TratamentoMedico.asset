@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b979deaf517daa4bb5d738ac449d192, type: 3}
-  m_Name: TratamentoIntensivo
+  m_Name: TratamentoMedico
   m_EditorClassIdentifier: 
-  name: TratamentoIntensivo
-  description: 
+  name: Tratamento Medico
+  description: "Cura depress\xE3o"
   healing: 0
   type: 0
   lifetime: 0
   duration: 0
-  numberOfCards: 1
+  numberOfCards: 2

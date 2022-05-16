@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b979deaf517daa4bb5d738ac449d192, type: 3}
   m_Name: MedicoFamiliar
   m_EditorClassIdentifier: 
-  name: MedicoFamiliar
+  name: Medico Familiar
   description: 
-  healing: 0
-  type: 0
-  lifetime: 1
-  duration: 1
+  healing: 10
+  type: 1
+  lifetime: 0
+  duration: 0
   numberOfCards: 3

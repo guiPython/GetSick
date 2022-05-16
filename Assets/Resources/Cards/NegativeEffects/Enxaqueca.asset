@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Enxaqueca
   m_EditorClassIdentifier: 
   name: Enxaqueca
-  description: "Doen\xE7a neurol\xF3gica, gen\xE9tica e cr\xF4nica cuja principal
-    caracter\xEDstica \xE9 a dor de cabe\xE7a latejante"
-  damage: 0.5
+  description: "Dor de cabe\xE7a cr\xF4nica"
+  damage: 2
   curedBy:
   - Analgesico
-  - AlimentacaoSaudavel
+  - Alimentacao Saudavel
   type: 0
   lifetime: 1
   duration: 5
-  numberOfCards: 1
+  numberOfCards: 20

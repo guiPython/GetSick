@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a5d48142589aa498cf8bf1778b28c4, type: 3}
   m_Name: FebreAmarela
   m_EditorClassIdentifier: 
-  name: FebreAmarela
+  name: Febre Amarela
   description: 
-  damage: 1
+  damage: 6
   curedBy: []
   type: 0
   lifetime: 1
   duration: 5
-  numberOfCards: 2
+  numberOfCards: 10

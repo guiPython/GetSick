@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Repouso
   description: 
-  healing: 0.25
+  healing: 0.5
   type: 1
-  lifetime: 0
-  duration: 0
-  numberOfCards: 2
+  lifetime: 1
+  duration: 5
+  numberOfCards: 10

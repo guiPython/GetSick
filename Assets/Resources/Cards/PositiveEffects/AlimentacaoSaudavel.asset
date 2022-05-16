@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b979deaf517daa4bb5d738ac449d192, type: 3}
   m_Name: AlimentacaoSaudavel
   m_EditorClassIdentifier: 
-  name: AlimentacaoSaudavel
+  name: Alimentacao Saudavel
   description: 
-  healing: 0.25
+  healing: 1
   type: 1
-  lifetime: 0
-  duration: 0
-  numberOfCards: 2
+  lifetime: 1
+  duration: 5
+  numberOfCards: 10

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cigarro
   description: 
-  damage: 1
-  curedBy: []
+  damage: 2
+  curedBy:
+  - Habitos Saudaveis
   type: 0
-  lifetime: 0
-  duration: 0
-  numberOfCards: 4
+  lifetime: 1
+  duration: 10
+  numberOfCards: 10

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b979deaf517daa4bb5d738ac449d192, type: 3}
   m_Name: RemediosDiversos
   m_EditorClassIdentifier: 
-  name: RemediosDiversos
+  name: Remedios Diversos
   description: 
-  healing: 5
-  type: 0
-  lifetime: 0
-  duration: 0
-  numberOfCards: 3
+  healing: 1
+  type: 1
+  lifetime: 1
+  duration: 5
+  numberOfCards: 5

@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Analgesico
   m_EditorClassIdentifier: 
   name: Analgesico
-  description: "Subst\xE2ncias utilizadas \u200B\u200Bpara aliviar o sintoma de dor
-    associado a doen\xE7as, les\xF5es ou cirurgias."
+  description: Cura enxaqueca
   healing: 0
   type: 0
   lifetime: 0
   duration: 0
-  numberOfCards: 1
+  numberOfCards: 5

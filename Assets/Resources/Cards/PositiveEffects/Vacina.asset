@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Vacina
   m_EditorClassIdentifier: 
   name: Vacina
-  description: 
-  healing: 0.5
-  type: 1
-  lifetime: 2
+  description: Cura Covid19
+  healing: 0
+  type: 0
+  lifetime: 0
   duration: 0
   numberOfCards: 2
