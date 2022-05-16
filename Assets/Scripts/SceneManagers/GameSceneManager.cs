@@ -48,9 +48,11 @@ public class GameSceneManager : MonoBehaviour
         this.player2Data.cards.Clear();
 
         PlayerUIManager player1UIManager = this.GetPlayerUI(this.player1Data);
+        player1UIManager.Init();
         this.DrawNCardsToPlayer(3, player1UIManager);
 
         PlayerUIManager player2UIManager = this.GetPlayerUI(this.player2Data);
+        player2UIManager.Init();
         this.DrawNCardsToPlayer(3, player2UIManager);
 
         this.playerOrderQueue.Enqueue(player1Data);
