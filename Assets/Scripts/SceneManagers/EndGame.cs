@@ -12,6 +12,9 @@ public class EndGame : MonoBehaviour
     public PlayerData player1Data;
     public PlayerData player2Data;
 
+    public RawImage rawImagePlayer1;
+    public RawImage rawImagePlayer2;
+
     public GameObject canvas;
 
     public VideoClip alive;
@@ -34,18 +37,30 @@ public class EndGame : MonoBehaviour
             videoPlayer1.clip = (VideoClip) Resources.Load("Videos/alive");
             videoPlayer1.targetTexture = (RenderTexture) Resources.Load("Videos/AliveRT");
 
+            var videoPlayer1Render = canvas.transform.Find("VideoPlayer1Render").GetComponent<RawImage>();
+            videoPlayer1Render.texture = (RenderTexture) Resources.Load("Videos/AliveRT");
+
             var videoPlayer2 = canvas.transform.Find("VideoPlayer2").GetComponent<VideoPlayer>();
             videoPlayer2.clip = (VideoClip) Resources.Load("Videos/dead");
             videoPlayer2.targetTexture = (RenderTexture) Resources.Load("Videos/DeadRT");
+
+            var videoPlayer2Render = canvas.transform.Find("VideoPlayer2Render").GetComponent<RawImage>();
+            videoPlayer2Render.texture = (RenderTexture) Resources.Load("Videos/DeadRT");
         } else if (playerNumber == "2")
         {
             var videoPlayer1 = canvas.transform.Find("VideoPlayer1").GetComponent<VideoPlayer>();
             videoPlayer1.clip = (VideoClip) Resources.Load("Videos/dead");
             videoPlayer1.targetTexture = (RenderTexture) Resources.Load("Videos/DeadRT");
 
+            var videoPlayer1Render = canvas.transform.Find("VideoPlayer1Render").GetComponent<RawImage>();
+            videoPlayer1Render.texture = (RenderTexture) Resources.Load("Videos/DeadRT");
+
             var videoPlayer2 = canvas.transform.Find("VideoPlayer2").GetComponent<VideoPlayer>();
             videoPlayer2.clip = (VideoClip) Resources.Load("Videos/alive");
             videoPlayer2.targetTexture = (RenderTexture) Resources.Load("Videos/AliveRT");
+
+            var videoPlayer2Render = canvas.transform.Find("VideoPlayer2Render").GetComponent<RawImage>();
+            videoPlayer2Render.texture = (RenderTexture) Resources.Load("Videos/AliveRT");
         }
     }
 
@@ -59,6 +74,20 @@ public class EndGame : MonoBehaviour
         var statusObject = GameObject.Find("PlayerStatus");
         statusObject.GetComponent<Text>().color = Color.red;
         statusObject.GetComponent<Text>().text = "Empate";
+
+        var videoPlayer1 = canvas.transform.Find("VideoPlayer1").GetComponent<VideoPlayer>();
+        videoPlayer1.clip = (VideoClip) Resources.Load("Videos/dead");
+        videoPlayer1.targetTexture = (RenderTexture) Resources.Load("Videos/DeadRT");
+
+        var videoPlayer1Render = canvas.transform.Find("VideoPlayer1Render").GetComponent<RawImage>();
+        videoPlayer1Render.texture = (RenderTexture) Resources.Load("Videos/DeadRT");
+
+        var videoPlayer2 = canvas.transform.Find("VideoPlayer2").GetComponent<VideoPlayer>();
+        videoPlayer2.clip = (VideoClip) Resources.Load("Videos/dead");
+        videoPlayer2.targetTexture = (RenderTexture) Resources.Load("Videos/DeadRT");
+
+        var videoPlayer2Render = canvas.transform.Find("VideoPlayer2Render").GetComponent<RawImage>();
+        videoPlayer2Render.texture = (RenderTexture) Resources.Load("Videos/DeadRT");
     }
 
 
