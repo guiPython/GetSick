@@ -9,21 +9,21 @@ using UnityEngine.Video;
 /// </summary>
 public class EndGame : MonoBehaviour
 {
-    public PlayerData player1Data;
-    public PlayerData player2Data;
+    public PlayerData player1Data; // informações do player 1
+    public PlayerData player2Data; // informações do player 1
 
-    public RawImage rawImagePlayer1;
-    public RawImage rawImagePlayer2;
+    public RawImage rawImagePlayer1; // imagem de render do video do player 1
+    public RawImage rawImagePlayer2; // imagem de render do video do player 2
 
-    public GameObject canvas;
+    public GameObject canvas; // canvas
 
-    public VideoClip alive;
+    public VideoClip alive; // video da situação do jogador quando vivo ao final do game
 
-    public VideoClip dead;
+    public VideoClip dead; // video da situação do jogador quando morto ao final do game
 
     /// <summary>
-    /// Encontra o GameObject status.
-    /// 
+    /// Setta o titulo com o player vencedor 
+    /// Configura e atribui o video ao respectivo jogador morto e vivo
     /// /// </summary>
     private void SetStatusForPlayerWinner(PlayerData player, string playerNumber)
     {
@@ -33,6 +33,7 @@ public class EndGame : MonoBehaviour
 
         if (playerNumber == "1")
         {
+            // caso o jogador 1 vença
             var videoPlayer1 = canvas.transform.Find("VideoPlayer1").GetComponent<VideoPlayer>();
             videoPlayer1.clip = (VideoClip) Resources.Load("Videos/alive");
             videoPlayer1.targetTexture = (RenderTexture) Resources.Load("Videos/AliveRT");
@@ -48,6 +49,7 @@ public class EndGame : MonoBehaviour
             videoPlayer2Render.texture = (RenderTexture) Resources.Load("Videos/DeadRT");
         } else if (playerNumber == "2")
         {
+            // caso o jogador 2 vença
             var videoPlayer1 = canvas.transform.Find("VideoPlayer1").GetComponent<VideoPlayer>();
             videoPlayer1.clip = (VideoClip) Resources.Load("Videos/dead");
             videoPlayer1.targetTexture = (RenderTexture) Resources.Load("Videos/DeadRT");
@@ -66,8 +68,8 @@ public class EndGame : MonoBehaviour
 
     
     /// <summary>
-    /// Encontra o GameObject status.
-    /// 
+    /// Setta o titulo como empate
+    /// Configura e atribui aos dois jogadores o video de morto
     /// </summary>
     private void SetStatusForTie()
     {
