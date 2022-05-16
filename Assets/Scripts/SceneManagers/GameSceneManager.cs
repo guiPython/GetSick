@@ -42,13 +42,13 @@ public class GameSceneManager : MonoBehaviour
         Text buyCardTextComponent = GameObject.Find("BuyCard/Text").GetComponent<Text>();
         this.buyCard = new TextWithNumber(buyCardTextComponent, buyCardTemplate, maxBuysPerTurn);
 
-        this.player1Data.timeRemaining = 10.0f;
+        this.player1Data.timeRemaining = 100.0f;
         this.player1Data.numberOfBuysThisTurn = 0;
         this.player1Data.status = PlayerStatus.Alive;
         this.player1Data.activeEffects.Clear();
         this.player1Data.cards.Clear();
 
-        this.player2Data.timeRemaining = 10.0f;
+        this.player2Data.timeRemaining = 100.0f;
         this.player2Data.numberOfBuysThisTurn = 0;
         this.player2Data.status = PlayerStatus.Alive;
         this.player2Data.activeEffects.Clear();

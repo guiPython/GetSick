@@ -490,6 +490,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Data: {fileID: 11400000, guid: 664a1a2da80339e4996dd98440610509, type: 2}
   player2Data: {fileID: 11400000, guid: 5d2547f26f205ac4facbc9a6b3165daa, type: 2}
+  rawImagePlayer1: {fileID: 0}
+  rawImagePlayer2: {fileID: 0}
   canvas: {fileID: 0}
   alive: {fileID: 0}
   dead: {fileID: 0}
@@ -674,10 +676,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
