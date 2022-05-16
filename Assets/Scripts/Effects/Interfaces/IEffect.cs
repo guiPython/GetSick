@@ -1,4 +1,6 @@
-﻿public interface IEffect
+﻿/// <summary>
+/// Interface dos efeitos
+/// </summary>
+public interface IEffect
 {
-    Effect? DyingWish();
 }

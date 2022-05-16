@@ -1,13 +1,19 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Componente de carta
+/// </summary>
 public class Card : MonoBehaviour, IPointerDownHandler
 {
-    public new string name;
-    public int owner;
+    public new string name; // Nome da carta
+    public int owner; // Player dono da carta
 
-    public Effect effect;
+    public Effect effect; // Efeito da carta
 
+    /*
+     * Método que adiciona um efeito na carta
+     */
     public Card AddEffect(Effect effect)
     {
         this.effect = effect;
@@ -15,6 +21,9 @@ public class Card : MonoBehaviour, IPointerDownHandler
         return this;
     }
 
+    /*
+     * Método que aciona ao clicar na carta
+     */
     public void OnPointerDown(PointerEventData eventData)
     {
         GameObject

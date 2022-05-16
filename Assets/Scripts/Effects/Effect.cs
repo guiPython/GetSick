@@ -1,12 +1,18 @@
+/// <summary>
+/// Classe abstrata Effect, representa um efeito qualquer
+/// </summary>
 public abstract class Effect : IEffect
 {
-    public string name;
+    public string name; // Nome do efeito
 
-    public string description;
-    public PlayerData? target;
-    public int turnApplied;
-    public IEffectLifeTime lifetime;
+    public string description; // Descrição do efeito
+    public PlayerData? target; // Alvo do efeito
+    public int turnApplied; // Turno que esse efeito foi aplicado
+    public IEffectLifeTime lifetime; // Tipo de duração do efeito
 
+    /*
+     * Construtor da classe
+     */
     public Effect(string name, string description, IEffectLifeTime lifetime)
     {
         this.name = name;
@@ -14,13 +20,14 @@ public abstract class Effect : IEffect
         this.lifetime = lifetime;
      }
 
+    /*
+     * Método que executa o efeito do efeito
+     */
     public virtual void Affect() { }
 
-    public Effect? DyingWish()
-    {
-        return null;
-    }
-
+    /*
+     * Método que faz o override do ToString()
+     */
     public override string ToString()
     {
         string str = this.name;
@@ -35,10 +42,5 @@ public abstract class Effect : IEffect
         }
 
         return str;
-    }
-
-    public Effect Clone()
-    {
-        return (Effect) this.MemberwiseClone();
     }
 }
