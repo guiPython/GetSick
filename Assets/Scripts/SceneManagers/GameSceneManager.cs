@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class GameSceneManager : MonoBehaviour
 {
     private const float yearsPerTurn = 1.0f;
+    private const int maxBuysPerTurn = 1;
     private TextWithNumber turn;
     private const string template = "Turn: {0}";
 
@@ -30,11 +31,19 @@ public class GameSceneManager : MonoBehaviour
         Text turnTextComponent = GameObject.Find("Turn").GetComponent<Text>();
         this.turn = new TextWithNumber(turnTextComponent, template, 0);
 
-        player1Data.timeRemaining = 100.0f;
-        player1Data.status = PlayerStatus.Alive;
+        this.player1Data.timeRemaining = 100.0f;
+        this.player1Data.status = PlayerStatus.Alive;
+        this.player1Data.cards.Clear();
 
-        player2Data.timeRemaining = 100.0f;
-        player2Data.status = PlayerStatus.Alive;
+        this.player2Data.timeRemaining = 100.0f;
+        this.player2Data.status = PlayerStatus.Alive;
+        this.player2Data.cards.Clear();
+
+        PlayerUIManager player1UIManager = this.GetPlayerUI(this.player1Data);
+        this.DrawNCardsToPlayer(3, player1UIManager);
+
+        PlayerUIManager player2UIManager = this.GetPlayerUI(this.player2Data);
+        this.DrawNCardsToPlayer(3, player2UIManager);
 
         this.playerOrderQueue.Enqueue(player1Data);
         this.playerOrderQueue.Enqueue(player2Data);
@@ -82,24 +91,18 @@ public class GameSceneManager : MonoBehaviour
         PlayerData cardTarget = card.effect is DamagingEffect ? this.currentPlayer.enemy : this.currentPlayer;
         this.RemoveCard(card, this.currentPlayer);
 
+        card.effect.turnApplied = this.turn.GetValue();
+        cardTarget.AddEffect(card.effect);
+
         if (card.effect.lifetime is ImmediateLifetime)
         {
-            cardTarget.AddEffect(card.effect);
             card.effect.Affect();
             cardTarget.RemoveEffect(card.effect);
-            this.HandleCurrentTurn();
-        }
-        else
-        {
-            this.HandleCurrentTurn();
-            cardTarget.AddEffect(card.effect);
         }
 
         bool gameHasEnded = this.CheckWhetherGameHasEnded();
         if (gameHasEnded)
             SceneManager.LoadScene("EndGameScene");
-
-        this.MoveToTheNextTurn();
     }
 
     private void FlipBothPlayersCards()
@@ -117,6 +120,9 @@ public class GameSceneManager : MonoBehaviour
         {
             foreach (Effect effect in player.activeEffects)
             {
+                if (effect.turnApplied == this.turn.GetValue())
+                    continue;
+                
                 effect.Affect();
 
                 if (effect.lifetime is TemporaryLifetime lifetime)
@@ -148,6 +154,10 @@ public class GameSceneManager : MonoBehaviour
 
     private void MoveToTheNextTurn()
     {
+        bool gameHasEnded = this.CheckWhetherGameHasEnded();
+        if (gameHasEnded)
+            SceneManager.LoadScene("EndGameScene");
+
         this.playerOrderQueue.Dequeue();
         this.playerOrderQueue.Enqueue(this.currentPlayer);
         this.currentPlayer = this.playerOrderQueue.Peek();
@@ -164,6 +174,8 @@ public class GameSceneManager : MonoBehaviour
         this.FlipBothPlayersCards();
 
         this.turn++;
+
+        this.currentPlayer.numberOfBuysThisTurn = 0;
     }
 
     private void UpdateNames()
@@ -185,6 +197,9 @@ public class GameSceneManager : MonoBehaviour
 
     public void BuyCard()
     {
+        if (this.currentPlayer.numberOfBuysThisTurn == maxBuysPerTurn)
+            return;
+
         PlayerUIManager playerUIManager = this.GetPlayerUI(this.currentPlayer);
 
         if (playerUIManager.SlotsAreFull())
@@ -198,20 +213,22 @@ public class GameSceneManager : MonoBehaviour
         if (this.cards.Count == 0)
             return;
 
-        var effectData = this.cards.First();
+        this.DrawNCardsToPlayer(1, playerUIManager);
 
-        Effect effect = this.ParseEffect(effectData);
-        
-        playerUIManager.AddCard(name: effect.name, effect: effect);
-        this.cards.Remove(effectData);
+        this.currentPlayer.numberOfBuysThisTurn++;
+    }
 
-        this.HandleCurrentTurn();
+    private void DrawNCardsToPlayer(uint numberOfCardsToDraw, PlayerUIManager playerUIManager)
+    {
+        for (int i = 0; i < numberOfCardsToDraw; i++)
+        {
+            var effectData = this.cards.First();
 
-        bool gameHasEnded = this.CheckWhetherGameHasEnded();
-        if (gameHasEnded)
-            SceneManager.LoadScene("EndGameScene");
+            Effect effect = this.ParseEffect(effectData);
 
-        this.MoveToTheNextTurn();
+            playerUIManager.AddCard(name: effect.name, effect: effect);
+            this.cards.Remove(effectData);
+        }
     }
 
     private Effect ParseEffect(ScriptableObject effectData)

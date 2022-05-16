@@ -4,6 +4,7 @@ public abstract class Effect : IEffect
 
     public string description;
     public PlayerData? target;
+    public int turnApplied;
     public IEffectLifeTime lifetime;
 
     public Effect(string name, string description, IEffectLifeTime lifetime)

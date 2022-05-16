@@ -18,6 +18,7 @@ public class PlayerData : ScriptableObject
     public List<Effect> activeEffects = new List<Effect>(); // Efeitos ativos no jogador
     public PlayerData enemy;
     public PlayerStatus status;
+    public int numberOfBuysThisTurn = 0;
 
     public bool OwnsCard(Card card) => card.owner == this.Number;
 
