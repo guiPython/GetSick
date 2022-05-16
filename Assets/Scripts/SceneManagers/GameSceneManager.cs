@@ -6,26 +6,33 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Essa classe gerencia toda a cena do jogo de cartas
+/// </summary>
 public class GameSceneManager : MonoBehaviour
 {
-    private const float yearsPerTurn = 1.0f;
-    private const int maxBuysPerTurn = 1;
-    private TextWithNumber turn;
-    private TextWithNumber buyCard;
-    private const string turnTemplate = "Turno: {0}";
-    private const string buyCardTemplate = "Comprar Carta ({0})";
+    private const float yearsPerTurn = 1.0f; // dano padrão por turno
+    private const int maxBuysPerTurn = 1; // máximo de cartas que podem ser compradas por turno
+    private TextWithNumber turn; // componente turno do jogo
+    private TextWithNumber buyCard; // componente turno do jogo
+    private const string turnTemplate = "Turno: {0}"; // constante do texto para o turno
+    private const string buyCardTemplate = "Comprar Carta ({0})"; // constante do texto para a compra de cartas
 
-    private Queue<PlayerData> playerOrderQueue = new Queue<PlayerData>();
+    private Queue<PlayerData> playerOrderQueue = new Queue<PlayerData>(); // ordem de jogada 
 
-    private PlayerData currentPlayer;
+    private PlayerData currentPlayer; // player dono da rodada atual
 
-    public PlayerData player1Data;
-    public PlayerData player2Data;
+    public PlayerData player1Data; // dados do player 1
+    public PlayerData player2Data;// dados do player 2
 
-    public PlayerData winner;
+    public PlayerData winner; // vencedor
 
-    private List<ScriptableObject> cards = new List<ScriptableObject>();
+    private List<ScriptableObject> cards = new List<ScriptableObject>(); // cartas em jogo
 
+    /*
+        Método que inicia o jogo, setta os atributos primarios da partida e de jogador
+        define a ordem de jogada
+    */
     void Start()
     {
         InitializeCards();
@@ -64,6 +71,10 @@ public class GameSceneManager : MonoBehaviour
         this.UpdateNames();
     }
 
+    /*
+        Carrega as cartas de efeito negativo e positivo dos recursos, adiciona na fila
+        E aplica um shuffle nessa lista
+    */
     private void InitializeCards()
     {
         List<NegativeEffectData> negativeEffectCards = Resources.LoadAll<NegativeEffectData>("Cards/NegativeEffects").ToList();
@@ -88,11 +99,18 @@ public class GameSceneManager : MonoBehaviour
         this.cards.Shuffle();
     }
 
+    /*
+        Reinicializa as cartas chamando o método de inicializar as cartas
+    */
     private void ReinitializeCards()
     {
         this.InitializeCards();
     }
 
+    /*
+        Método chamado quando a carta é clicada, caso seja o dono da carta, aplica os efeitos no player adversário
+        e, por fim, verifica se o jogo acabou e caso tenha acabado, chama a tela de endGame
+    */
     public void OnCardClicked(Card card)
     {
         if (!this.currentPlayer.OwnsCard(card))
@@ -115,6 +133,9 @@ public class GameSceneManager : MonoBehaviour
             SceneManager.LoadScene("EndGameScene");
     }
 
+    /*
+        Vira as cartas dos dois jogadores usando um métododo playerUIManager
+    */
     private void FlipBothPlayersCards()
     {
         PlayerUIManager playerUIManager = this.GetPlayerUI(this.currentPlayer);
@@ -124,6 +145,10 @@ public class GameSceneManager : MonoBehaviour
         enemyUIManager.FlipCards();
     }
 
+    /*
+        Lida com rodada, iterando sobre as rodadas e aplicando os efeitos da cartas caso não tenham expiradas
+        E verifica se o jogar morreu (perdeu)
+    */
     private void HandleCurrentTurn()
     {
         foreach (PlayerData player in this.playerOrderQueue)
@@ -150,6 +175,9 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    /*
+        Remove um carta de um jogador da mesa
+    */
     public void RemoveCard(Card card, PlayerData player)
     {
         player.cards.Remove(card);
@@ -157,11 +185,18 @@ public class GameSceneManager : MonoBehaviour
         Destroy(card);
     }
 
+    /*
+        Método para checar se o jogo acabou verificando se um dois jogadores morreu (perdeu) 
+    */
     public bool CheckWhetherGameHasEnded()
     {
         return player1Data.ShouldBeDead() || player2Data.ShouldBeDead();
     }
 
+    /*
+        Método que move para o próximo turno verificando se o jogo acabou, dando a rodada para o próximo jogador
+        dando dano padrão da rodada, adicionando o turno e resetando o número de cartas para comprar 
+    */
     private void MoveToTheNextTurn()
     {
         bool gameHasEnded = this.CheckWhetherGameHasEnded();
@@ -189,6 +224,9 @@ public class GameSceneManager : MonoBehaviour
         this.buyCard.SetValue(maxBuysPerTurn);
     }
 
+    /*
+        Método que alterar a cor do dono da rodada para verde e o outro jogador para branco
+    */
     private void UpdateNames()
     {
         PlayerData currentPlayer = this.playerOrderQueue.Peek();
@@ -201,11 +239,17 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    /*
+        Método que retorna o playerUI
+    */
     private PlayerUIManager GetPlayerUI(PlayerData player)
     {
         return GameObject.Find($"Player{player.Number}UI").GetComponent<PlayerUIManager>();
     }
 
+    /*
+        Método que compra carta do monte caso o jogador tenha cartas para comprar e não tenha todas os slots da mesa com cartas
+    */
     public void BuyCard()
     {
         if (this.currentPlayer.numberOfBuysThisTurn == maxBuysPerTurn)
@@ -230,6 +274,9 @@ public class GameSceneManager : MonoBehaviour
         this.buyCard--;
     }
 
+    /*
+        Método que, para cada carta jogada, aplicado o efeito dela no jogador adversário e a remove do jogo
+    */
     private void DrawNCardsToPlayer(uint numberOfCardsToDraw, PlayerUIManager playerUIManager)
     {
         for (int i = 0; i < numberOfCardsToDraw; i++)
@@ -243,6 +290,9 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    /*
+        Método que transforma os efeitos das cartas em dano ou em cura dependendo do tipo da carta
+    */
     private Effect ParseEffect(ScriptableObject effectData)
     {
         if (effectData is PositiveEffectData positiveEffect)
@@ -287,6 +337,9 @@ public class GameSceneManager : MonoBehaviour
         throw new Exception("Invalid program state");
     }
 
+    /*
+        Método que passa o turno
+    */
     public void PassTurn()
     {
         this.currentPlayer = this.playerOrderQueue.Peek();
@@ -294,6 +347,10 @@ public class GameSceneManager : MonoBehaviour
         this.MoveToTheNextTurn();
     }
 
+    /*
+        Método que atualiza o jogo a cada frame, caso seja apertado a teclaca da seta direita, passa o turno
+        verifica se o jogo acabou e caso acabe, chama a cena de endGame 
+    */
     void Update()
     {
         if (this.CheckWhetherGameHasEnded())
