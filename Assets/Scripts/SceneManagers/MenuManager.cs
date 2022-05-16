@@ -2,22 +2,22 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-/*
-* Essa classe gerencia a cena de menu que so pode carregar a cena do jogo;
-*/
+/// <summary>
+// Essa classe gerencia a cena de menu que so pode carregar a cena do jogo;
+/// </summary>
 public class MenuManager : MonoBehaviour
 {
-    /// <summary>
-    /// Carrega a cena
-    /// </summary>
+    /*
+        Carrega a cena
+    */
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene"); 
     }
 
-    /// <summary>
-    /// Carrega a cena de Creditos
-    /// </summary>
+    /*
+        Carrega a cena de Creditos
+    */
     public void GoToCredits()
     {
         SceneManager.LoadScene("CreditsScene");

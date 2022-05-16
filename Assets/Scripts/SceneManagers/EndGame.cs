@@ -21,10 +21,10 @@ public class EndGame : MonoBehaviour
 
     public VideoClip dead; // video da situação do jogador quando morto ao final do game
 
-    /// <summary>
-    /// Setta o titulo com o player vencedor 
-    /// Configura e atribui o video ao respectivo jogador morto e vivo
-    /// /// </summary>
+    /*
+        Setta o titulo com o player vencedor 
+        Configura e atribui o video ao respectivo jogador morto e vivo
+    */
     private void SetStatusForPlayerWinner(PlayerData player, string playerNumber)
     {
         var statusObject = GameObject.Find("PlayerStatus");
@@ -67,10 +67,10 @@ public class EndGame : MonoBehaviour
     }
 
     
-    /// <summary>
-    /// Setta o titulo como empate
-    /// Configura e atribui aos dois jogadores o video de morto
-    /// </summary>
+    /*
+        Setta o titulo como empate
+        Configura e atribui aos dois jogadores o video de morto
+    */
     private void SetStatusForTie()
     {
         var statusObject = GameObject.Find("PlayerStatus");
@@ -111,25 +111,25 @@ public class EndGame : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Carrega a cena do Jogo novamente.
-    /// </summary>
+    /*
+        Carrega a cena do Jogo novamente.
+    */
     public void RestartGame()
     {
         SceneManager.LoadScene("GameScene");
     }
 
-    /// <summary>
-    /// Carrega a cena do Menu novamente.
-    /// </summary>
+    /*
+        Carrega a cena do Menu novamente.
+    */
     public void GotoMainMenu()
     {
         SceneManager.LoadScene("MenuScene");
     }
 
-    /// <summary>
-    /// Carrega a cena de Cr�ditos.
-    /// </summary>
+    /*
+        Carrega a cena de Cr�ditos.
+    */
     public void ExitGame()
     {
         SceneManager.LoadScene("CreditsScene");
