@@ -20,6 +20,11 @@ public class PlayerUIManager : MonoBehaviour
 
     public void Start()
     {
+        this.Init();
+    }
+
+    public void Init()
+    {
         this.name = this.transform.Find("Name").GetComponent<Text>();
         Text timeRemainingTextComponent = this.transform.Find("TimeRemaining").GetComponent<Text>();
         this.activeEffects = this.transform.Find("ActiveEffects").GetComponent<Text>();
