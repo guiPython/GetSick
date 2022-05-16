@@ -11,7 +11,9 @@ public class GameSceneManager : MonoBehaviour
     private const float yearsPerTurn = 1.0f;
     private const int maxBuysPerTurn = 1;
     private TextWithNumber turn;
-    private const string template = "Turno: {0}";
+    private TextWithNumber buyCard;
+    private const string turnTemplate = "Turno: {0}";
+    private const string buyCardTemplate = "Comprar Carta ({0})";
 
     private Queue<PlayerData> playerOrderQueue = new Queue<PlayerData>();
 
@@ -29,7 +31,9 @@ public class GameSceneManager : MonoBehaviour
         InitializeCards();
 
         Text turnTextComponent = GameObject.Find("Turn").GetComponent<Text>();
-        this.turn = new TextWithNumber(turnTextComponent, template, 0);
+        this.turn = new TextWithNumber(turnTextComponent, turnTemplate, 0);
+        Text buyCardTextComponent = GameObject.Find("BuyCard/Text").GetComponent<Text>();
+        this.buyCard = new TextWithNumber(buyCardTextComponent, buyCardTemplate, maxBuysPerTurn);
 
         this.player1Data.timeRemaining = 100.0f;
         this.player1Data.status = PlayerStatus.Alive;
@@ -176,6 +180,7 @@ public class GameSceneManager : MonoBehaviour
         this.turn++;
 
         this.currentPlayer.numberOfBuysThisTurn = 0;
+        this.buyCard.SetValue(maxBuysPerTurn);
     }
 
     private void UpdateNames()
@@ -216,6 +221,7 @@ public class GameSceneManager : MonoBehaviour
         this.DrawNCardsToPlayer(1, playerUIManager);
 
         this.currentPlayer.numberOfBuysThisTurn++;
+        this.buyCard--;
     }
 
     private void DrawNCardsToPlayer(uint numberOfCardsToDraw, PlayerUIManager playerUIManager)

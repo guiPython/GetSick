@@ -49,6 +49,15 @@ public class TextWithNumber
     }
 
     /*
+     * Definição do operador --
+     */
+    public static TextWithNumber operator --(TextWithNumber a)
+    {
+        a.SetValue(a.value - 1);
+        return a;
+    }
+
+    /*
      * Definição do operador == para inteiros
      */
     public static bool operator ==(TextWithNumber a, int b)

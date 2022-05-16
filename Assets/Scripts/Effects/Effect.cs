@@ -27,11 +27,11 @@ public abstract class Effect : IEffect
 
         if (this.lifetime is TemporaryLifetime temporaryLt)
         {
-            str += " (" + temporaryLt.duration + " turns left)";
+            str += " (" + temporaryLt.duration + " turnos restantes)";
         }
         else if (this.lifetime is PermanentLifetime)
         {
-            str += " (Permanent)";
+            str += " (Permanente)";
         }
 
         return str;
