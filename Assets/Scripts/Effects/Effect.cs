@@ -23,7 +23,18 @@ public abstract class Effect : IEffect
 
     public override string ToString()
     {
-        return this.name;
+        string str = this.name;
+
+        if (this.lifetime is TemporaryLifetime temporaryLt)
+        {
+            str += " (" + temporaryLt.duration + " turns left)";
+        }
+        else if (this.lifetime is PermanentLifetime)
+        {
+            str += " (Permanent)";
+        }
+
+        return str;
     }
 
     public Effect Clone()

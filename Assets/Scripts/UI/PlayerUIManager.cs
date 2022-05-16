@@ -50,12 +50,34 @@ public class PlayerUIManager : MonoBehaviour
 
         if (effect is DamagingEffect damagingEffect)
         {
-            string template = "-{0:0.00} per round";
+            string template = "-{0:0.00} Tempo de vida do inimigo";
+
+            if (damagingEffect.lifetime is TemporaryLifetime
+             || damagingEffect.lifetime is PermanentLifetime)
+            {
+                template += " por round";
+            }
+            else
+            {
+                template += " imediatamente";
+            }
+
             TextWithFloat value = new TextWithFloat(valueText, template, damagingEffect.damage);
         }
         else if (effect is HealingEffect healingEffect)
         {
-            string template = "+{0:0.00} per round";
+            string template = "+{0:0.00} Tempo de vida";
+
+            if (healingEffect.lifetime is TemporaryLifetime
+             || healingEffect.lifetime is PermanentLifetime)
+            {
+                template += "\npor round";
+            }
+            else
+            {
+                template += "\nimediatamente";
+            }
+
             TextWithFloat value = new TextWithFloat(valueText, template, healingEffect.healing);
         }
 
