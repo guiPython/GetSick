@@ -11,7 +11,7 @@ public class GameSceneManager : MonoBehaviour
     private const float yearsPerTurn = 1.0f;
     private const int maxBuysPerTurn = 1;
     private TextWithNumber turn;
-    private const string template = "Turn: {0}";
+    private const string template = "Turno: {0}";
 
     private Queue<PlayerData> playerOrderQueue = new Queue<PlayerData>();
 

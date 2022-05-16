@@ -15,8 +15,8 @@ public class PlayerUIManager : MonoBehaviour
     private List<GameObject> cardSlots;
     public const int numberOfCardsSlots = 3;
 
-    private string timeRemainingTemplate = "Time remaining: {0:0.00} years";
-    private string activeEffectsLabel = "Active effects: \n";
+    private string timeRemainingTemplate = "Tempo restante: {0:0.00} anos";
+    private string activeEffectsLabel = "Efeitos ativos: \n";
 
     public void Start()
     {
@@ -55,7 +55,7 @@ public class PlayerUIManager : MonoBehaviour
             if (damagingEffect.lifetime is TemporaryLifetime
              || damagingEffect.lifetime is PermanentLifetime)
             {
-                template += " por round";
+                template += " por rodada";
             }
             else
             {
@@ -71,7 +71,7 @@ public class PlayerUIManager : MonoBehaviour
             if (healingEffect.lifetime is TemporaryLifetime
              || healingEffect.lifetime is PermanentLifetime)
             {
-                template += "\npor round";
+                template += "\npor rodada";
             }
             else
             {
