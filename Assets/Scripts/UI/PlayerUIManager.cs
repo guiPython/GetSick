@@ -5,24 +5,31 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 
+/// <summary>
+/// Classe que gerencia a UI de um player no jogo
+/// </summary>
 public class PlayerUIManager : MonoBehaviour
 {
-    public PlayerData playerData;
+    public PlayerData playerData; // dados do jogador
 
-    private new Text name;
-    private TextWithFloat timeRemaining;
-    private Text activeEffects;
-    private List<GameObject> cardSlots;
-    public const int numberOfCardsSlots = 3;
+    private new Text name; // nome do jogador
+    private TextWithFloat timeRemaining; // dado que o jogador ainda pode levar
+    private Text activeEffects; // efeitos ativos nesse jogador
+    private List<GameObject> cardSlots; // slots de cartas da mesa
+    public const int numberOfCardsSlots = 3; // numero máximo de slots para cartas na mesa
 
-    private string timeRemainingTemplate = "Tempo restante: {0:0.00} anos";
-    private string activeEffectsLabel = "Efeitos ativos: \n";
+    private string timeRemainingTemplate = "Tempo restante: {0:0.00} anos"; // texto do dado restante do jogador
+    private string activeEffectsLabel = "Efeitos ativos: \n"; // texto de efeitos ativos do jogador
 
+    // inicia o jogo
     public void Start()
     {
         this.Init();
     }
 
+    /*
+        Método que inicia o componente com os atributos iniciais
+    */
     public void Init()
     {
         this.name = this.transform.Find("Name").GetComponent<Text>();
@@ -35,6 +42,10 @@ public class PlayerUIManager : MonoBehaviour
         this.activeEffects.text = this.activeEffectsLabel + string.Join("\n", this.playerData.activeEffects);
     }
 
+    /*
+        Método que adiciona carta caso os slots do jogador não estejam vazios
+        Carrega cada pedaço da carta dinamicamente a partir de um template
+    */
     public void AddCard(string name, Effect effect)
     {
         if (this.SlotsAreFull())
@@ -96,6 +107,9 @@ public class PlayerUIManager : MonoBehaviour
         card.gameObject.SetActive(true);
     }
 
+    /*
+        Método que vira todas cartas do jogador 
+    */
     public void FlipCards()
     {
         foreach (var cardSlot in this.cardSlots)
@@ -106,16 +120,25 @@ public class PlayerUIManager : MonoBehaviour
         }
     }
 
+    /*
+        Método que verifica um slot do jogador está vazio
+    */
     public bool SlotIsEmpty(GameObject slot)
     {
         return slot.GetComponent<Card>() is null;
     }
 
+    /*
+        Método auxiliar que procura e retorna um componente genérico
+    */
     public T GetCardSlotComponent<T>(GameObject cardSlot, string componentName)
     {
         return cardSlot.transform.Find(componentName).GetComponent<T>();
     }
 
+    /*
+        Método que pega as cartas do canvas e adiciona no deck do jogador 
+    */
     private List<GameObject> GetCardsGameObjects()
     {
         List<GameObject> gameObjects = new List<GameObject>();
@@ -131,17 +154,26 @@ public class PlayerUIManager : MonoBehaviour
         return gameObjects;
     }
 
+    /*
+        Método que setta a cor do nome do jogador
+    */
     public void UpdateNameColor(Color color)
     {
         this.name.color = color;
     }
 
+    /*
+        Método que atualiza o jogo setando o dano restante do jogador e os efeitos ativos nele
+    */
     private void FixedUpdate()
     {
         this.timeRemaining.SetValue(this.playerData.timeRemaining);
         this.activeEffects.text = this.activeEffectsLabel + string.Join("\n", this.playerData.activeEffects);
     }
 
+    /*
+        Método que retorna se todos os slots de cartas estão vazios
+    */
     public bool SlotsAreFull()
     {
         return this.cardSlots.All(slot => !SlotIsEmpty(slot));

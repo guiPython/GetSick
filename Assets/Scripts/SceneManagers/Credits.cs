@@ -10,7 +10,7 @@ public class Credits : MonoBehaviour
 {
 
     /*
-    /// Metodo para fechar o Jogo
+      Metodo para fechar o Jogo
     */
     public void ExitGame()
     {
@@ -18,7 +18,7 @@ public class Credits : MonoBehaviour
     }
 
     /*
-    /// Metodo que carrega a cena do Menu
+      Metodo que carrega a cena do Menu
     */
     public void GoToMenu()
     {
