@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 /// <summary>
 /// Essa classe gerencia toda a cena do final do jogo.
@@ -11,15 +12,41 @@ public class EndGame : MonoBehaviour
     public PlayerData player1Data;
     public PlayerData player2Data;
 
+    public GameObject canvas;
+
+    public VideoClip alive;
+
+    public VideoClip dead;
+
     /// <summary>
     /// Encontra o GameObject status.
     /// 
     /// /// </summary>
-    private void SetStatusForPlayerWinner(PlayerData player)
+    private void SetStatusForPlayerWinner(PlayerData player, string playerNumber)
     {
         var statusObject = GameObject.Find("PlayerStatus");
         statusObject.GetComponent<Text>().color = Color.green;
-        statusObject.GetComponent<Text>().text = "Player " + player.name + " venceu!";
+        statusObject.GetComponent<Text>().text = player.name + " venceu!";
+
+        if (playerNumber == "1")
+        {
+            var videoPlayer1 = canvas.transform.Find("VideoPlayer1").GetComponent<VideoPlayer>();
+            videoPlayer1.clip = (VideoClip) Resources.Load("Videos/alive");
+            videoPlayer1.targetTexture = (RenderTexture) Resources.Load("Videos/AliveRT");
+
+            var videoPlayer2 = canvas.transform.Find("VideoPlayer2").GetComponent<VideoPlayer>();
+            videoPlayer2.clip = (VideoClip) Resources.Load("Videos/dead");
+            videoPlayer2.targetTexture = (RenderTexture) Resources.Load("Videos/DeadRT");
+        } else if (playerNumber == "2")
+        {
+            var videoPlayer1 = canvas.transform.Find("VideoPlayer1").GetComponent<VideoPlayer>();
+            videoPlayer1.clip = (VideoClip) Resources.Load("Videos/dead");
+            videoPlayer1.targetTexture = (RenderTexture) Resources.Load("Videos/DeadRT");
+
+            var videoPlayer2 = canvas.transform.Find("VideoPlayer2").GetComponent<VideoPlayer>();
+            videoPlayer2.clip = (VideoClip) Resources.Load("Videos/alive");
+            videoPlayer2.targetTexture = (RenderTexture) Resources.Load("Videos/AliveRT");
+        }
     }
 
     
@@ -38,15 +65,17 @@ public class EndGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canvas = GameObject.Find("Canvas");
+
         if (player1Data.ShouldBeDead() && player2Data.ShouldBeDead())
         {
             SetStatusForTie();
         } else if (player2Data.ShouldBeDead())
         {
-            SetStatusForPlayerWinner(player1Data);
+            SetStatusForPlayerWinner(player1Data, "1");
         } else if (player1Data.ShouldBeDead())
         {
-            SetStatusForPlayerWinner(player2Data);
+            SetStatusForPlayerWinner(player2Data, "2");
         }
     }
 
